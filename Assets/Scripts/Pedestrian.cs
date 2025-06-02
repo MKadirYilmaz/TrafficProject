@@ -4,6 +4,7 @@ public class Pedestrian : MonoBehaviour
 {
     public float speed = 0.5f;
     public LineRenderer currentRoad;
+    public LayerMask vehicleMask;
 
     private Vector3 destination;
     private Rigidbody2D rb;
@@ -41,6 +42,21 @@ public class Pedestrian : MonoBehaviour
             return;
         destination = (currentRoad.GetPosition(currentRoadStep) - transform.position).normalized;
         transform.up = destination;
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 0.1f, transform.up, 0.1f, vehicleMask);
+
+        if (hits.Length != 0)
+        {
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.collider.gameObject != gameObject)
+                {
+                    Debug.Log($"{this.name} touched to {hit.collider.name}");
+                    rb.linearVelocity = Vector2.zero;
+                    return;
+                }    
+            }
+        }
+
         rb.MovePosition(transform.position + destination * currentSpeed * Time.deltaTime);
     }
 

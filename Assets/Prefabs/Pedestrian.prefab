@@ -49,6 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   currentRoad: {fileID: 0}
+  vehicleMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!50 &3440814920319152790
 Rigidbody2D:
   serializedVersion: 5

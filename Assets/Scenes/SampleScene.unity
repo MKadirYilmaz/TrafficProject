@@ -1162,11 +1162,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8054248169126678427, guid: b2179874b545f6148be09f63c1ee6524, type: 3}
       propertyPath: maxSpawnDuration
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8054248169126678427, guid: b2179874b545f6148be09f63c1ee6524, type: 3}
       propertyPath: minSpawnDuration
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8704385981066447351, guid: b2179874b545f6148be09f63c1ee6524, type: 3}
       propertyPath: m_Positions.Array.size

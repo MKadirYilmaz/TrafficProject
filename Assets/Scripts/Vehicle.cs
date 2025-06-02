@@ -57,8 +57,9 @@ public class Vehicle : MonoBehaviour
             }
         }
         Vector3 start = transform.position;
-        Vector3 end = start + transform.up;
+        Vector3 end = start + transform.up * 0.45f;
         Debug.DrawLine(start, end, Color.red);
+        
         //transform.position += destination * currentSpeed * Time.deltaTime;
     }
 
@@ -68,7 +69,8 @@ public class Vehicle : MonoBehaviour
             return;
         destination = (currentRoad.GetPosition(currentRoadStep) - transform.position).normalized;
         transform.up = destination;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, 0.2f, vehicleLayerMask);
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position + transform.up * 0.1f, new Vector2(0.3f, 0.3f), 0, transform.up, 0.1f, vehicleLayerMask);
+        //RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, 0.2f, vehicleLayerMask);
         if (hits.Length != 0)
         {
             foreach (RaycastHit2D hit in hits)
