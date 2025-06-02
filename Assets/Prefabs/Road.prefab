@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4902773889135315027}
-  - component: {fileID: 8704385981066447351}
   - component: {fileID: 8054248169126678427}
+  - component: {fileID: 8704385981066447351}
   m_Layer: 0
   m_Name: Road
   m_TagString: Untagged
@@ -33,6 +33,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8054248169126678427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419784470740347980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ad3931c22d171418d434ba9c4c2e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpawnDuration: 1
+  maxSpawnDuration: 2
+  vehicle: {fileID: 7704714802293538100, guid: 9caac20742b6d79478333961fee2a728, type: 3}
 --- !u!120 &8704385981066447351
 LineRenderer:
   serializedVersion: 2
@@ -140,18 +155,3 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &8054248169126678427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1419784470740347980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ad3931c22d171418d434ba9c4c2e7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minSpawnDuration: 1
-  maxSpawnDuration: 2
-  vehicle: {fileID: 7704714802293538100, guid: 9caac20742b6d79478333961fee2a728, type: 3}

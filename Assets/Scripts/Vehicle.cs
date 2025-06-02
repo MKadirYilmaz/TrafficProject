@@ -12,7 +12,9 @@ public class Vehicle : MonoBehaviour
     private Vector3 destination;
     private Rigidbody2D rb;
 
+    private TrafficLight prevLight;
     private bool isWaiting = false;
+    private bool canPass = false;
     private int currentRoadStep = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,12 +27,21 @@ public class Vehicle : MonoBehaviour
     void OnTriggerStay2D(Collider2D collision)
     {
         TrafficLight light = collision.GetComponentInParent<TrafficLight>();
-        if (light.currentState != TrafficLight.LightState.Green && !isWaiting)
+        if (light != prevLight) // If vehicle reaches another light reset the canPass value
+            canPass = false;
+
+        if (light.currentState == TrafficLight.LightState.Green)
+        {
+            canPass = true;
+        }
+        else if (!isWaiting && !canPass)
         {
             currentSpeed = 0;
             TrafficLight.onGreenLid += OnGreenLid;
             isWaiting = true;
         }
+
+        prevLight = light;
     }
 
     // Update is called once per frame

@@ -9,6 +9,7 @@ public class Pedestrian : MonoBehaviour
     private Rigidbody2D rb;
     private float currentSpeed;
     private bool isWaiting = false;
+    private bool canPass = false;
     private int currentRoadStep = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,13 +47,15 @@ public class Pedestrian : MonoBehaviour
     void OnTriggerStay2D(Collider2D collision)
     {
         TrafficLight light = collision.GetComponentInParent<TrafficLight>();
-        if (light.currentState != TrafficLight.LightState.Red && !isWaiting)
-        {
-            rb.linearVelocity = Vector2.zero;
-            currentSpeed = 0;
-            TrafficLight.onRedLid += OnRedLid;
-            isWaiting = true;
-        }
+        if (light.currentState == TrafficLight.LightState.Red) // If pedestrian sees the red light for the cars it can pass no matter what
+            canPass = true;
+        if (light.currentState != TrafficLight.LightState.Red && !isWaiting && !canPass)
+            {
+                rb.linearVelocity = Vector2.zero;
+                currentSpeed = 0;
+                TrafficLight.onRedLid += OnRedLid;
+                isWaiting = true;
+            }
     }
 
     private void OnRedLid()
