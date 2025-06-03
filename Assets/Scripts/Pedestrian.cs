@@ -8,6 +8,7 @@ public class Pedestrian : MonoBehaviour
 
     private Vector3 destination;
     private Rigidbody2D rb;
+    private TrafficLight prevLight;
     private float currentSpeed;
     private bool isWaiting = false;
     private bool canPass = false;
@@ -63,15 +64,19 @@ public class Pedestrian : MonoBehaviour
     void OnTriggerStay2D(Collider2D collision)
     {
         TrafficLight light = collision.GetComponentInParent<TrafficLight>();
+        if (light != prevLight) // If pedestrian reaches another light reset the canPass value
+            canPass = false;
+
         if (light.currentState == TrafficLight.LightState.Red) // If pedestrian sees the red light for the cars it can pass no matter what
             canPass = true;
-        if (light.currentState != TrafficLight.LightState.Red && !isWaiting && !canPass)
-            {
-                rb.linearVelocity = Vector2.zero;
-                currentSpeed = 0;
-                TrafficLight.onRedLid += OnRedLid;
-                isWaiting = true;
-            }
+        else if (!isWaiting && !canPass)
+        {
+            rb.linearVelocity = Vector2.zero;
+            currentSpeed = 0;
+            TrafficLight.onRedLid += OnRedLid;
+            isWaiting = true;
+        }
+        prevLight = light;
     }
 
     private void OnRedLid()
