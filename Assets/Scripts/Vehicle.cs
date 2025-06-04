@@ -47,7 +47,7 @@ public class Vehicle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(transform.position, currentRoad.GetPosition(currentRoadStep)) < 0.01)
+        if (Vector2.Distance(transform.position, currentRoad.GetPosition(currentRoadStep)) < 0.02)
         {
             currentRoadStep++;
             if (currentRoadStep >= currentRoad.positionCount)
@@ -56,11 +56,6 @@ public class Vehicle : MonoBehaviour
                 return;
             }
         }
-        Vector3 start = transform.position;
-        Vector3 end = start + transform.up * 0.45f;
-        Debug.DrawLine(start, end, Color.red);
-        
-        //transform.position += destination * currentSpeed * Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -70,7 +65,6 @@ public class Vehicle : MonoBehaviour
         destination = (currentRoad.GetPosition(currentRoadStep) - transform.position).normalized;
         transform.up = destination;
         RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position + transform.up * 0.1f, new Vector2(0.3f, 0.3f), 0, transform.up, 0.1f, vehicleLayerMask);
-        //RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, 0.2f, vehicleLayerMask);
         if (hits.Length != 0)
         {
             foreach (RaycastHit2D hit in hits)

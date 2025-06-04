@@ -43,7 +43,7 @@ public class Pedestrian : MonoBehaviour
             return;
         destination = (currentRoad.GetPosition(currentRoadStep) - transform.position).normalized;
         transform.up = destination;
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 0.1f, transform.up, 0.1f, vehicleMask);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position + transform.up * 0.1f, 0.1f, transform.up, 0.1f, vehicleMask);
 
         if (hits.Length != 0)
         {
